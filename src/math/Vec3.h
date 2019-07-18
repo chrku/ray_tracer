@@ -118,4 +118,8 @@ inline Vec3 normalize(const Vec3& orig) {
   return orig / orig.norm();
 }
 
+inline Vec3 lerp(const Vec3& lhs, const Vec3& rhs, float t) {
+  return (1 - t) * lhs + t * rhs;
+}
+
 #endif //RAY_TRACER_VEC3_H

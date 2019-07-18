@@ -9,14 +9,10 @@
 #include <vector>
 #include <iostream>
 
-#include "../math/Color.h"
 #include "../math/Vec3.h"
 
 constexpr int RGB_RANGE = 255;
 
-bool write_image_ppm_ascii(const std::string& filename,
-  const std::vector<ColorRGB>& colors, std::size_t width,
-  std::size_t height);
 bool write_image_ppm_ascii(const std::string& filename,
   const std::vector<Vec3>& colors, std::size_t width,
   std::size_t height);
