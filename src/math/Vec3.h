@@ -12,7 +12,6 @@ class Vec3 {
 public:
   Vec3() = default;
   Vec3(float x, float y, float z) : x_(x), y_(y), z_(z) {};
-  Vec3& operator=(const Vec3& other) = default;
 
   inline float x() const { return x_; }
   inline float y() const { return y_; }
@@ -96,6 +95,12 @@ inline Vec3 operator*(const Vec3& lhs, float rhs) {
 }
 inline Vec3 operator/(const Vec3& lhs, float rhs) {
   return {lhs.x() / rhs, lhs.y() / rhs, lhs.z() / rhs};
+}
+inline Vec3 operator*(const float& lhs, const Vec3& rhs) {
+  return {lhs * rhs.x(), lhs * rhs.y(), lhs * rhs.z()};
+}
+inline Vec3 operator/(const float& lhs, const Vec3& rhs) {
+  return {lhs / rhs.x(), lhs / rhs.y(), lhs / rhs.z()};
 }
 
 inline float dot(const Vec3& lhs, const Vec3& rhs) {
