@@ -14,7 +14,7 @@ public:
   
   Vec3 origin() const { return origin_; };
   Vec3 direction() const { return direction_; }
-  Vec3 pointAtValue(float t) const { return origin_ + t * direction_; };
+  Vec3 pointAtValue(float t) const { return origin_ + (t * direction_); };
 private:
   Vec3 origin_;
   Vec3 direction_;
