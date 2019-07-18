@@ -104,7 +104,7 @@ inline Vec3 operator/(const float& lhs, const Vec3& rhs) {
 }
 
 inline float dot(const Vec3& lhs, const Vec3& rhs) {
-  return lhs.x() + rhs.x() + lhs.y() + rhs.y() + rhs.z() + lhs.z();
+  return lhs.x() * rhs.x() + lhs.y() * rhs.y() + rhs.z() * lhs.z();
 }
 inline Vec3 cross(const Vec3& lhs, const Vec3& rhs) {
   return {

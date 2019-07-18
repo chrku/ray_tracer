@@ -4,4 +4,4 @@ project(ray_tracer CXX)
 
 add_executable(ray_tracer src/main.cpp
         src/file_formats/ImagePPM.h src/math/Vec3.h src/file_formats/ImagePPM.cpp
-        src/math/Ray.h src/util/ColorBuffer.cpp src/util/ColorBuffer.h src/math/Util.h)
+        src/math/Ray.h src/util/ColorBuffer.cpp src/util/ColorBuffer.h src/math/Util.h src/math/Sphere.h)
