@@ -22,6 +22,8 @@ public:
   std::vector<Vec3>& data();
   Vec3* dataPtr();
 
+  inline std::size_t width() { return width_; }
+  inline std::size_t height() { return height_; }
 private:
   std::vector<Vec3> data_;
 

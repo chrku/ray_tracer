@@ -118,6 +118,10 @@ inline Vec3 normalize(const Vec3& orig) {
   return orig / orig.norm();
 }
 
+inline Vec3 vec3_sqrt(const Vec3& orig) {
+  return {std::sqrt(orig.x()), std::sqrt(orig.y()), std::sqrt(orig.z())};
+}
+
 inline Vec3 lerp(const Vec3& lhs, const Vec3& rhs, float t) {
   return (1 - t) * lhs + t * rhs;
 }
