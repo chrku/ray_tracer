@@ -8,10 +8,13 @@
 #include "Vec3.h"
 #include "Ray.h"
 #include "Hitable.h"
+#include "Material.h"
 
 class Sphere : public Hitable {
 public:
-  Sphere(const Vec3& center, float radius) : center_(center), radius_(radius) {}
+  template <typename MATERIAL_IMPL>
+  Sphere(const Vec3& center, float radius, const MATERIAL_IMPL& material) : center_(center), radius_(radius),
+    material_(std::make_shared<MATERIAL_IMPL>(material)) {}
 
   bool hit(const Ray& r, float t_min, float t_max, HitRecord& record) const override {
     Vec3 origin_center = r.origin() - center_;
@@ -28,6 +31,7 @@ public:
         record.t = solution_1;
         record.point = r.pointAtValue(record.t);
         record.normal = (record.point - center_) / radius_;
+        record.material = material_;
         return true;
       }
       // Exit point
@@ -36,6 +40,7 @@ public:
         record.t = solution_2;
         record.point = r.pointAtValue(record.t);
         record.normal = (record.point - center_) / radius_;
+        record.material = material_;
         return true;
       }
     }
@@ -47,6 +52,7 @@ public:
 private:
   Vec3 center_;
   float radius_;
+  std::shared_ptr<Material> material_;
 };
 
 

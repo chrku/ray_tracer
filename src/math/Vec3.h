@@ -7,6 +7,7 @@
 
 #include <array>
 #include <cmath>
+#include <random>
 
 class Vec3 {
 public:
@@ -126,4 +127,9 @@ inline Vec3 lerp(const Vec3& lhs, const Vec3& rhs, float t) {
   return (1 - t) * lhs + t * rhs;
 }
 
+inline Vec3 reflect(const Vec3& v, const Vec3& n) {
+  return v - 2 * dot(v, n) * n;
+}
+
+Vec3 generate_random_point_in_unit_sphere(std::uniform_real_distribution<float>& distribution, std::mt19937& generator);
 #endif //RAY_TRACER_VEC3_H

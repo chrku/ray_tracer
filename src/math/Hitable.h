@@ -6,14 +6,18 @@
 #define RAY_TRACER_HITABLE_H
 
 #include <iterator>
+#include <memory>
 
 #include "Vec3.h"
 #include "Ray.h"
+
+class Material;
 
 struct HitRecord {
   float t;
   Vec3 point;
   Vec3 normal;
+  std::shared_ptr<Material> material;
 };
 
 class Hitable {
@@ -23,14 +27,14 @@ public:
   static bool hitCollection(Iterator begin, Iterator end, const Ray& r, float t_min, float t_max, HitRecord& record) {
     bool hit = false;
     float closest = t_max;
-    HitRecord temp{};
 
     // Check for every object if hit, update hit record if true
     while (begin != end) {
       const Hitable& h = **(begin)++;
+      HitRecord temp{};
       if (h.hit(r, t_min, closest, temp)) {
         hit = true;
-        closest = record.t;
+        closest = temp.t;
         record = temp;
       }
     }

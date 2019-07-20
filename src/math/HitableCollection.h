@@ -22,7 +22,7 @@ public:
 
   bool hit(const Ray& ray, float t_min, float t_max, HitRecord& record) const override {
     return Hitable::hitCollection(hitables.begin(), hitables.end(), ray,
-      t_min , t_max, record);
+      t_min, t_max, record);
   }
 
 private:

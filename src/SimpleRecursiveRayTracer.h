@@ -14,10 +14,11 @@
 class SimpleRecursiveRayTracer {
 public:
   SimpleRecursiveRayTracer();
+  explicit SimpleRecursiveRayTracer(int number_samples);
 
   void render(const Hitable& object, ColorBuffer& framebuffer);
 private:
-  Vec3 color(const Ray& ray, const Hitable& object);
+  Vec3 color(const Ray& ray, const Hitable& object, int recursion_count);
 
   std::random_device device_;
   std::mt19937 prng_;
