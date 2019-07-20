@@ -21,7 +21,7 @@ int main() {
   int width = 400;
   int height = 200;
   ColorBuffer colorBuffer(width, height);
-  SimpleRecursiveRayTracer rayTracer(300);
+  SimpleRecursiveRayTracer rayTracer(100);
   HitableCollection world;
   std::random_device seed_device;
 

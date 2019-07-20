@@ -12,6 +12,7 @@
 class Material {
 public:
   virtual bool scatter(const Ray& ray_in, const HitRecord& hit, Vec3& attenuation, Ray& ray_out) const = 0;
+  virtual ~Material() = default;
 };
 
 

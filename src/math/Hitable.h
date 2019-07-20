@@ -41,6 +41,7 @@ public:
 
     return hit;
   }
+  virtual ~Hitable() = default;
 };
 
 

@@ -14,11 +14,11 @@ SimpleRecursiveRayTracer::SimpleRecursiveRayTracer(int number_samples) : device_
 void SimpleRecursiveRayTracer::render(const Hitable &object, ColorBuffer& framebuffer) {
   for (int j = 0; j < framebuffer.height(); ++j) {
     for (int i = 0; i < framebuffer.width(); ++i) {
-      float u = static_cast<float>(i) / framebuffer.width();
-      float v = static_cast<float>(j) / framebuffer.height();
       Vec3 color_average(0.f, 0.f, 0.f);
       for (int s = 0; s < numberOfSamples_; ++s) {
-        Ray r = camera_.getRayRandomOffset(u, v, framebuffer.width(), framebuffer.height());
+        float u = (static_cast<float>(i) + dist_(prng_)) / framebuffer.width();
+        float v = (static_cast<float>(j) + dist_(prng_)) / framebuffer.height();
+        Ray r = camera_.getRay(u, v);
         color_average += color(r, object, 0);
       }
       framebuffer(j, i) = vec3_sqrt(color_average / numberOfSamples_) * 255.9;
@@ -29,7 +29,7 @@ void SimpleRecursiveRayTracer::render(const Hitable &object, ColorBuffer& frameb
 Vec3 SimpleRecursiveRayTracer::color(const Ray& ray, const Hitable& object, int recursion_count) {
   HitRecord record{};
   // Check for object intersection
-  bool hitsObject = object.hit(ray, 0.f, std::numeric_limits<float>::max(), record);
+  bool hitsObject = object.hit(ray, 0.001f, std::numeric_limits<float>::max(), record);
   if (hitsObject) {
     Ray scattered{};
     // Recursively trace reflection ray
