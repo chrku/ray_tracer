@@ -12,25 +12,25 @@
 
 class Camera {
 public:
-  explicit Camera(std::random_device& device) : origin_{0.f, 0.f, 0.f}, lowerLeftCorner_{-2.f, -1.f, -1.f},
-    horizontal_{4.f, 0.f, 0.f}, vertical_{0.f, 2.f, 0.f}, prng_(device()),
-    randomOffset_(0.f, 1.f) {}
-
-  Ray getRay(float u, float v) { return {origin_, lowerLeftCorner_ + u * horizontal_ + v * vertical_ - origin_}; }
-  Ray getRayRandomOffset(float u, float v, float width, float height) {
-    u += randomOffset_(prng_) / width;
-    v += randomOffset_(prng_) / height;
-    return getRay(u, v);
+  explicit Camera() : origin_{0.f, 0.f, 0.f}, lowerLeftCorner_{-2.f, -1.f, -1.f},
+    horizontal_{4.f, 0.f, 0.f}, vertical_{0.f, 2.f, 0.f} {}
+  Camera(Vec3 look_from, Vec3 look_at, Vec3 world_up, float fovy, float aspect) : origin_(look_from) {
+    float half_height = std::tan(fovy / 2.f);
+    float half_width = aspect * half_height;
+    Vec3 w = normalize(look_from - look_at);
+    Vec3 u = normalize(cross(world_up, w));
+    Vec3 v = cross(w, u);
+    lowerLeftCorner_ = origin_ - half_width * u - half_height * v - w;
+    horizontal_ = 2 * half_width * u;
+    vertical_ = 2 * half_height * v;
   }
 
+  Ray getRay(float u, float v) { return {origin_, lowerLeftCorner_ + u * horizontal_ + v * vertical_ - origin_}; }
 private:
   Vec3 origin_;
-  Vec3 lowerLeftCorner_;
-  Vec3 horizontal_;
-  Vec3 vertical_;
-
-  std::uniform_real_distribution<float> randomOffset_;
-  std::mt19937 prng_;
+  Vec3 lowerLeftCorner_{};
+  Vec3 horizontal_{};
+  Vec3 vertical_{};
 };
 
 

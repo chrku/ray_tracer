@@ -21,15 +21,19 @@
 int main() {
   int width = 400;
   int height = 200;
+  float fovy = 90.f;
+  float a = static_cast<float>(width) / height;
+
   ColorBuffer colorBuffer(width, height);
-  SimpleRecursiveRayTracer ray_tracer(100);
+  Camera camera(Vec3(-2, 2, 1), Vec3(0,0,-1), Vec3(0,1,0), fovy * M_PI / 180, a);
+  SimpleRecursiveRayTracer ray_tracer(100, camera);
   HitableCollection world;
-  std::random_device seed_device;
 
   world.addHitable(Sphere(Vec3(1.f, 0.f, -1.f), 0.5, Metal(Vec3(0.8f, 0.6f, 0.2f), 1.f)));
   world.addHitable(Sphere(Vec3(-1.f, 0.f, -1.f), 0.5, Dielectric(1.5f)));
   world.addHitable(Sphere(Vec3(0.f,0.f,-1.f), 0.5f, Lambertian(Vec3(0.8f, 0.3f, 0.3f))));
   world.addHitable(Sphere(Vec3(0.f, -100.5, -1.f), 100.f, Lambertian(Vec3(0.8f, 0.8f, 0.f))));
+
 
   ray_tracer.render(world, colorBuffer);
 

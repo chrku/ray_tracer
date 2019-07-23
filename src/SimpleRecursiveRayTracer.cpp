@@ -6,10 +6,14 @@
 #include "math/Material.h"
 
 SimpleRecursiveRayTracer::SimpleRecursiveRayTracer() : device_(), prng_(device_()),
-  dist_(0.f, 1.f), camera_(device_), numberOfSamples_(100) {}
+  dist_(0.f, 1.f), camera_(), numberOfSamples_(100) {}
 
 SimpleRecursiveRayTracer::SimpleRecursiveRayTracer(int number_samples) : device_(), prng_(device_()),
-  dist_(0.f, 1.f), camera_(device_), numberOfSamples_(number_samples) {}
+  dist_(0.f, 1.f), camera_(), numberOfSamples_(number_samples) {}
+
+SimpleRecursiveRayTracer::SimpleRecursiveRayTracer(int number_samples, const Camera& camera) :
+  device_(), prng_(device_()),
+  dist_(0.f, 1.f), camera_(camera), numberOfSamples_(number_samples) {}
 
 void SimpleRecursiveRayTracer::render(const Hitable &object, ColorBuffer& framebuffer) {
   for (int j = 0; j < framebuffer.height(); ++j) {

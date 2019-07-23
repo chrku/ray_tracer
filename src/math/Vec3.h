@@ -107,8 +107,8 @@ inline float dot(const Vec3& lhs, const Vec3& rhs) {
 inline Vec3 cross(const Vec3& lhs, const Vec3& rhs) {
   return {
     (lhs.y() * rhs.z() - lhs.z() * rhs.y()),
-    -(lhs.x() * rhs.z() - lhs.z() * rhs.x()),
-    (lhs.x() * rhs.y() - lhs.y() * rhs.z())
+    (lhs.z() * rhs.x() - lhs.x() * rhs.z()),
+    (lhs.x() * rhs.y() - lhs.y() * rhs.x())
   };
 }
 
