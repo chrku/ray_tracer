@@ -13,8 +13,6 @@
 
 class SimpleRecursiveRayTracer {
 public:
-  SimpleRecursiveRayTracer();
-  explicit SimpleRecursiveRayTracer(int number_samples);
   SimpleRecursiveRayTracer(int number_samples, const Camera& camera);
 
   void render(const Hitable& object, ColorBuffer& framebuffer);
