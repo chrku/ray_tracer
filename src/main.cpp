@@ -39,6 +39,9 @@ void generateRandomScene(HitableCollection& world) {
       }
     }
   }
+  world.addHitable(Sphere(Vec3(0,1,0), 1.f, Dielectric(1.5)));
+  world.addHitable(Sphere(Vec3(-4,1,0), 1.f, Lambertian(Vec3(0.4, 0.2, 0.1))));
+  world.addHitable(Sphere(Vec3(4,1,0), 1.f, Metal(Vec3(0.7, 0.6, 0.5), 0.f)));
 }
 
 int main() {
@@ -48,7 +51,7 @@ int main() {
   float a = static_cast<float>(width) / height;
 
   ColorBuffer colorBuffer(width, height);
-  Camera camera(Vec3(-2, 2, 1), Vec3(0,0,-1), Vec3(0,1,0), fovy * M_PI / 180, a, 0.0001f, 3.f);
+  Camera camera(Vec3(-2, 2, 1), Vec3(0,0,-1), Vec3(0,1,0), fovy * M_PI / 180, a, 0.1f, 3.f);
   SimpleRecursiveRayTracer ray_tracer(100, camera);
   HitableCollection world;
 
