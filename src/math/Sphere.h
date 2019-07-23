@@ -13,7 +13,7 @@
 class Sphere : public Hitable {
 public:
   template <typename MATERIAL_IMPL>
-  Sphere(const Vec3& center, float radius, const MATERIAL_IMPL& material) : center_(center), radius_(radius),
+  Sphere(const Vec3& center, float radius, const MATERIAL_IMPL&& material) : center_(center), radius_(radius),
     material_(std::make_shared<MATERIAL_IMPL>(material)) {}
 
   bool hit(const Ray& r, float t_min, float t_max, HitRecord& record) const override {

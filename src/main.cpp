@@ -18,10 +18,33 @@
 #include "math/HitableCollection.h"
 #include "math/Dielectric.h"
 
+void generateRandomScene(HitableCollection& world) {
+  int n = 500;
+  world.addHitable(Sphere(Vec3(0, -1000, 0), 1000, Lambertian(Vec3(0.5, 0.5, 0.5))));
+
+  std::mt19937 prng;
+  std::uniform_real_distribution<float> dist(0.f, 1.f);
+
+  for (int a = -11; a < 11; ++a) {
+    for (int b = -11; b < 11; ++b) {
+      float choose_mat = dist(prng);
+      Vec3 center(a + 0.9 * dist(prng), 0.2, b + 0.9 * dist(prng));
+      if ((center - Vec3(4, 0.2, 0)).norm() > 0.9f) {
+        if (choose_mat < 0.8) // diffuse
+          world.addHitable(Sphere(center, 0.2, Lambertian(Vec3(dist(prng) * dist(prng), dist(prng) * dist(prng), dist(prng) * dist(prng)))));
+        else if (choose_mat < 0.95) //metal
+          world.addHitable(Sphere(center, 0.2, Metal(Vec3(dist(prng) * dist(prng), dist(prng) * dist(prng), dist(prng) * dist(prng)), 0.5 * dist(prng))));
+        else
+          world.addHitable(Sphere(center, 0.2, Dielectric(1.5)));
+      }
+    }
+  }
+}
+
 int main() {
   int width = 400;
   int height = 200;
-  float fovy = 45.f;
+  float fovy = 90.f;
   float a = static_cast<float>(width) / height;
 
   ColorBuffer colorBuffer(width, height);
@@ -29,10 +52,7 @@ int main() {
   SimpleRecursiveRayTracer ray_tracer(100, camera);
   HitableCollection world;
 
-  world.addHitable(Sphere(Vec3(1.f, 0.f, -1.f), 0.5, Metal(Vec3(0.8f, 0.6f, 0.2f), 1.f)));
-  world.addHitable(Sphere(Vec3(-1.f, 0.f, -1.f), 0.5, Dielectric(1.5f)));
-  world.addHitable(Sphere(Vec3(0.f,0.f,-1.f), 0.5f, Lambertian(Vec3(0.8f, 0.3f, 0.3f))));
-  world.addHitable(Sphere(Vec3(0.f, -100.5, -1.f), 100.f, Lambertian(Vec3(0.8f, 0.8f, 0.f))));
+  generateRandomScene(world);
 
   ray_tracer.render(world, colorBuffer);
 
