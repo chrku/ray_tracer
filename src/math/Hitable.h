@@ -10,6 +10,7 @@
 
 #include "Vec3.h"
 #include "Ray.h"
+#include "AABB.h"
 
 class Material;
 
@@ -23,6 +24,7 @@ struct HitRecord {
 class Hitable {
 public:
   virtual bool hit(const Ray& ray, float t_min, float t_max, HitRecord& record) const = 0;
+  virtual bool bounding_box(float t0, float t1, AABB& box) const = 0;
   template<class Iterator>
   static bool hitCollection(Iterator begin, Iterator end, const Ray& r, float t_min, float t_max, HitRecord& record) {
     bool hit = false;

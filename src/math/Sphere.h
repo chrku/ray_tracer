@@ -46,6 +46,10 @@ public:
     }
     return false;
   }
+  bool bounding_box(float t0, float t1, AABB& box) const override {
+      box = AABB(center_ - Vec3(radius_, radius_, radius_), center_ + Vec3(radius_, radius_, radius_));
+      return true;
+  }
 
   const Vec3& center() const { return center_; };
   float radius() const { return radius_; };

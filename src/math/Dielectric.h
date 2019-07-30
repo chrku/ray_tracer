@@ -46,10 +46,10 @@ public:
 
     // Sample and check if value > probability
     if (dist_(prng_) < reflection_probability) {
-      ray_out = Ray(hit.point, reflected);
+      ray_out = Ray(hit.point, reflected, ray_in.time());
     }
     else {
-      ray_out = Ray(hit.point, refracted);
+      ray_out = Ray(hit.point, refracted, ray_in.time());
     }
 
     return true;

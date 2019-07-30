@@ -2,15 +2,10 @@
 // Created by christoph on 17.07.19.
 //
 
-#include <vector>
-#include <memory>
-#include <limits>
-
 #include "math/Vec3.h"
-#include "math/Ray.h"
-#include "file_formats/ImagePPM.h"
 #include "util/ColorBuffer.h"
 #include "math/Sphere.h"
+#include "math/MovingSphere.h"
 #include "math/Camera.h"
 #include "math/Lambertian.h"
 #include "math/Metal.h"
@@ -31,7 +26,7 @@ void generateRandomScene(HitableCollection& world) {
       Vec3 center(a + 0.9 * dist(prng), 0.2, b + 0.9 * dist(prng));
       if ((center - Vec3(4, 0.2, 0)).norm() > 0.9f) {
         if (choose_mat < 0.8) // diffuse
-          world.addHitable(Sphere(center, 0.2, Lambertian(Vec3(dist(prng) * dist(prng), dist(prng) * dist(prng), dist(prng) * dist(prng)))));
+          world.addHitable(MovingSphere(center, center + Vec3(0.f, 0.5f * dist(prng), 0.f), 0.f, 1.f, 0.2, Lambertian(Vec3(dist(prng) * dist(prng), dist(prng) * dist(prng), dist(prng) * dist(prng)))));
         else if (choose_mat < 0.95) //metal
           world.addHitable(Sphere(center, 0.2, Metal(Vec3(dist(prng) * dist(prng), dist(prng) * dist(prng), dist(prng) * dist(prng)), 0.5 * dist(prng))));
         else
@@ -45,13 +40,13 @@ void generateRandomScene(HitableCollection& world) {
 }
 
 int main() {
-  int width = 400;
-  int height = 200;
-  float fovy = 90.f;
+  int width = 200;
+  int height = 100;
+  float fovy = 20.f;
   float a = static_cast<float>(width) / height;
 
   ColorBuffer colorBuffer(width, height);
-  Camera camera(Vec3(-2, 2, 1), Vec3(0,0,-1), Vec3(0,1,0), fovy * M_PI / 180, a, 0.1f, 3.f);
+  Camera camera(Vec3(13, 2, 3), Vec3(0,0,0), Vec3(0,1,0), fovy * M_PI / 180, a, 0.f, 10.f, 0.f, 1.f);
   SimpleRecursiveRayTracer ray_tracer(100, camera);
   HitableCollection world;
 

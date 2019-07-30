@@ -19,7 +19,7 @@ public:
   bool scatter(const Ray& ray_in, const HitRecord& record, Vec3& attenuation,
     Ray& ray_out) const override {
     Vec3 target = record.point + record.normal + generate_random_point_in_unit_sphere(dist_, prng_);
-    ray_out = Ray(record.point, target - record.point);
+    ray_out = Ray(record.point, target - record.point, ray_in.time());
     attenuation = albedo_;
     return true;
   }

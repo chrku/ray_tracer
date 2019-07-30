@@ -19,7 +19,8 @@ public:
   }
   bool scatter (const Ray& ray_in, const HitRecord& hit, Vec3& attenuation, Ray& ray_out) const override {
     Vec3 reflected = reflect(ray_in.direction(), hit.normal);
-    ray_out = Ray(hit.point, reflected + (fuzziness_ * generate_random_point_in_unit_sphere(dist_, prng_)));
+    ray_out = Ray(hit.point, reflected + (fuzziness_ * generate_random_point_in_unit_sphere(dist_, prng_)),
+            ray_in.time());
     attenuation = albedo_;
     return (dot(ray_out.direction(), hit.normal) > 0);
   }
