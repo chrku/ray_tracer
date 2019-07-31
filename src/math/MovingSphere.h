@@ -43,7 +43,7 @@ public:
         }
         return false;
     }
-    bool bounding_box(float t0, float t1, AABB& box) const override {
+    bool boundingBox(float t0, float t1, AABB& box) const override {
         box = AABB::surroundingBox(
                 AABB(center(t0) - Vec3(radius_, radius_, radius_),
                         center(t0) + Vec3(radius_, radius_, radius_)),

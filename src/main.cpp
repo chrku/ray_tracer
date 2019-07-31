@@ -12,6 +12,7 @@
 #include "SimpleRecursiveRayTracer.h"
 #include "math/HitableCollection.h"
 #include "math/Dielectric.h"
+#include "math/BVH.h"
 
 void generateRandomScene(HitableCollection& world) {
   int n = 500;
@@ -51,8 +52,9 @@ int main() {
   HitableCollection world;
 
   generateRandomScene(world);
+  BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 
-  ray_tracer.render(world, colorBuffer);
+  ray_tracer.render(node, colorBuffer);
 
   colorBuffer.writeAsPPM("/home/christoph/img.ppm");
 
