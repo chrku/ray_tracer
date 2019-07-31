@@ -44,8 +44,8 @@ public:
         }
     }
 
-    void sortByXAxis() {
-        std::sort(hitables.begin(), hitables.end(),
+    void sortByXAxis(int begin, int end) {
+        std::sort(hitables.begin() + begin, hitables.begin() + end,
                   [](auto a, auto b) -> bool {
                       AABB box_left{}, box_right{};
                       a->boundingBox(0, 0, box_left);
@@ -54,8 +54,8 @@ public:
                   });
     }
 
-    void sortByYAxis() {
-        std::sort(hitables.begin(), hitables.end(),
+    void sortByYAxis(int begin, int end) {
+        std::sort(hitables.begin() + begin, hitables.begin() + end,
                   [](auto a, auto b) -> bool {
                       AABB box_left{}, box_right{};
                       a->boundingBox(0, 0, box_left);
@@ -64,8 +64,8 @@ public:
                   });
     }
 
-    void sortByZAxis() {
-        std::sort(hitables.begin(), hitables.end(),
+    void sortByZAxis(int begin, int end) {
+        std::sort(hitables.begin() + begin, hitables.begin() + end,
                   [](auto a, auto b) -> bool {
                       AABB box_left{}, box_right{};
                       a->boundingBox(0, 0, box_left);
