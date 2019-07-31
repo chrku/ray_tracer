@@ -50,9 +50,9 @@ public:
         Vec3 smaller{std::min(box0.min().x(), box1.min().x()),
                      std::min(box0.min().y(), box1.min().y()),
                      std::min(box0.min().z(), box1.min().z())};
-        Vec3 bigger{std::min(box0.max().x(), box1.max().x()),
-                     std::min(box0.max().y(), box1.max().y()),
-                     std::min(box0.max().z(), box1.max().z())};
+        Vec3 bigger{std::max(box0.max().x(), box1.max().x()),
+                     std::max(box0.max().y(), box1.max().y()),
+                     std::max(box0.max().z(), box1.max().z())};
         return {smaller, bigger};
     }
 private:

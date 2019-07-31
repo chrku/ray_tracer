@@ -15,6 +15,7 @@ namespace BVH {
 
         BVHNode(HitableCollection& collection, int index_start, int index_end, float t0, float t1) {
             // Choose random axis to sort along
+            /*
             int axis = rand() % 3;
             switch (axis) {
                 case 0:
@@ -27,6 +28,7 @@ namespace BVH {
                     collection.sortByZAxis();
                 default:;
             }
+             */
 
             if ((index_end - index_start) == 1) {
                 left_ = collection[index_start];
