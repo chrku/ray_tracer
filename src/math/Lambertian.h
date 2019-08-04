@@ -7,12 +7,14 @@
 
 #include <random>
 #include <ctime>
+#include <utility>
 
 #include "Material.h"
+#include "../util/Texture.h"
 
 class Lambertian : public Material {
 public:
-  explicit Lambertian(const Vec3& albedo) : albedo_(albedo), dist_(0.f, 1.f) {
+  explicit Lambertian(std::shared_ptr<Texture> texture_ptr) : texture_(std::move(texture_ptr)), dist_(0.f, 1.f) {
     auto time = static_cast<uint32_t>(std::time(nullptr));
     prng_ = std::mt19937(time);
   }
@@ -20,11 +22,11 @@ public:
     Ray& ray_out) const override {
     Vec3 target = record.point + record.normal + generate_random_point_in_unit_sphere(dist_, prng_);
     ray_out = Ray(record.point, target - record.point, ray_in.time());
-    attenuation = albedo_;
+    attenuation = texture_->value(0, 0, record.point);
     return true;
   }
 private:
-  Vec3 albedo_;
+  std::shared_ptr<Texture> texture_;
   mutable std::mt19937 prng_;
   mutable std::uniform_real_distribution<float> dist_;
 };
