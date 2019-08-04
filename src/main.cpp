@@ -19,7 +19,7 @@ void generateRandomScene(HitableCollection &world) {
     std::shared_ptr<Texture> constant_1 = std::make_shared<ConstantTexture>(Vec3(0.9, 0.4, 0.3));
     std::shared_ptr<Texture> constant_2 = std::make_shared<ConstantTexture>(Vec3(0.3, 0.2, 0.3));
     std::shared_ptr<Texture> checker = std::make_shared<CheckerTexture>(constant_1, constant_2);
-    std::shared_ptr<Texture> perlin = std::make_shared<PerlinNoiseTexture>(generator, 20.f);
+    std::shared_ptr<Texture> perlin = std::make_shared<PerlinNoiseTexture>(generator, 5.f);
     world.addHitable(Sphere(Vec3(0, -1000, 0), 1000, Lambertian(perlin)));
     world.addHitable(Sphere(Vec3(4, 1, 0), 1.f, Metal(Vec3(0.7, 0.6, 0.5), 0.f)));
     world.addHitable(Sphere(Vec3(0, 1, 0), 1.f, Dielectric(1.5)));

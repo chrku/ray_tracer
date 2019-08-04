@@ -13,6 +13,7 @@ class PerlinNoiseGenerator {
 public:
     PerlinNoiseGenerator();
     float noise(const Vec3& point) const;
+    float turbulence(Vec3 point, int octaves=7) const;
 private:
     static float trilinearInterpolation(std::array<Vec3, 8> corners, float u, float v, float w);
 

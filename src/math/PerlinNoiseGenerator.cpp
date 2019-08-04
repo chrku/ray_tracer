@@ -68,3 +68,14 @@ float PerlinNoiseGenerator::trilinearInterpolation(std::array<Vec3, 8> corners, 
 
     return accumulator;
 }
+
+float PerlinNoiseGenerator::turbulence(Vec3 point, int octaves) const {
+    float accumulator = 0.f;
+    float weight = 1.0f;
+    for (int i = 0; i < octaves; ++i) {
+        accumulator += weight*noise(point);
+        weight *= 0.5;
+        point *= 2;
+    }
+    return std::abs(accumulator);
+}

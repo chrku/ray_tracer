@@ -33,7 +33,7 @@ PerlinNoiseTexture::PerlinNoiseTexture(std::shared_ptr<PerlinNoiseGenerator> gen
 {}
 
 Vec3 PerlinNoiseTexture::value(float u, float v, const Vec3 &point) const {
-    return Vec3(1, 1, 1) * 0.5f * (1 + generator_->noise(point * frequency_));
+    return Vec3(1, 1, 1) * 0.5f * (1 + std::sin(frequency_ * point.z() + 10.f *  generator_->turbulence(point)));
 }
 
 PerlinNoiseTexture::~PerlinNoiseTexture() = default;
