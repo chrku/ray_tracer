@@ -10,6 +10,7 @@
 #include "../materials/Dielectric.h"
 #include "../materials/DiffuseLight.h"
 #include "../shapes/AARect.h"
+#include "../shapes/transformations/FlipNormals.h"
 
 SceneGenerator::SceneGenerator() : rng_() {
 }
@@ -44,4 +45,14 @@ void SceneGenerator::simpleLight(HitableCollection &h) {
     h.addHitable(Sphere(Vec3(0, 2, 0), 2, Lambertian(perlin)));
     h.addHitable(Sphere(Vec3(0, 7, 0), 2, DiffuseLight(light)));
     h.addHitable(AARect(3, 5, 1, 3, -2, DiffuseLight(light)));
+}
+
+void SceneGenerator::cornellBox(HitableCollection &h) {
+    std::shared_ptr<Texture> red = std::make_shared<ConstantTexture>(Vec3(0.65, 0.05, 0.05));
+    std::shared_ptr<Texture> blue = std::make_shared<ConstantTexture>(Vec3(0.73, 0.73, 0.73));
+    std::shared_ptr<Texture> green = std::make_shared<ConstantTexture>(Vec3(0.12, 0.45, 0.15));
+    std::shared_ptr<Texture> white = std::make_shared<ConstantTexture>(Vec3(4.f, 4.f, 4.f));
+    std::shared_ptr<Hitable> rect1 = std::make_shared<AARect>(0, 555, 0, 555, 555, Lambertian(green));
+    h.addHitable(FlipNormals(rect1));
+    h.addHitable(AARect(0, 555, 0, 555, 555, DiffuseLight(white)));
 }

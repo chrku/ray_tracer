@@ -32,7 +32,7 @@ int main() {
     HitableCollection world;
     SceneGenerator generator;
 
-    generator.simpleLight(world);
+    generator.cornellBox(world);
 
     BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 

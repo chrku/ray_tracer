@@ -14,6 +14,8 @@ public:
     void twoPerlinSpheres(HitableCollection& h);
     void earthScene(HitableCollection& h);
     void simpleLight(HitableCollection& h);
+
+    void cornellBox(HitableCollection &h);
 private:
     float getRandom();
     std::mt19937 rng_;
