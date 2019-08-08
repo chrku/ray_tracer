@@ -47,4 +47,13 @@ private:
     float frequency_;
 };
 
+class ImageTexture : public Texture {
+public:
+    ImageTexture();
+    ImageTexture(std::string image_path, int A, int B);
+    Vec3 value(float u, float v, const Vec3& point) const override ;
+    ~ImageTexture() override;
+private:
+};
+
 #endif //RAY_TRACER_TEXTURE_H

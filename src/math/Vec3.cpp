@@ -11,3 +11,10 @@ Vec3 generate_random_point_in_unit_sphere(std::uniform_real_distribution<float>&
   } while (p.squaredNorm() >= 1.0);
   return p;
 }
+
+void getSphereUV(const Vec3& p, float& u, float& v) {
+    float phi = std::atan2(p.z(), p.x());
+    float theta = std::asin(p.y());
+    u = 1.f - (phi + M_PI) / (2.f * M_PI);
+    v = (theta + M_PI / 2.f) / M_PI;
+}

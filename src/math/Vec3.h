@@ -132,4 +132,7 @@ inline Vec3 reflect(const Vec3& v, const Vec3& n) {
 }
 
 Vec3 generate_random_point_in_unit_sphere(std::uniform_real_distribution<float>& distribution, std::mt19937& generator);
+
+void getSphereUV(const Vec3& p, float &u, float &v);
+
 #endif //RAY_TRACER_VEC3_H
