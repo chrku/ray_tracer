@@ -6,8 +6,8 @@
 #define RAY_TRACER_MATERIAL_H
 
 
-#include "Ray.h"
-#include "Hitable.h"
+#include "../math/Ray.h"
+#include "../shapes/Hitable.h"
 
 class Material {
 public:

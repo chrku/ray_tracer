@@ -6,7 +6,7 @@
 #define RAY_TRACER_SCENEGENERATOR_H
 
 
-#include "../math/HitableCollection.h"
+#include "../shapes/HitableCollection.h"
 
 class SceneGenerator {
 public:

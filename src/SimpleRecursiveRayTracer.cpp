@@ -3,7 +3,7 @@
 //
 
 #include "SimpleRecursiveRayTracer.h"
-#include "math/Material.h"
+#include "materials/Material.h"
 
 SimpleRecursiveRayTracer::SimpleRecursiveRayTracer(int number_samples, const Camera &camera) :
         device_(), prng_(device_()),

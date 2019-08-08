@@ -5,10 +5,10 @@
 #ifndef RAY_TRACER_SPHERE_H
 #define RAY_TRACER_SPHERE_H
 
-#include "Vec3.h"
-#include "Ray.h"
+#include "../math/Vec3.h"
+#include "../math/Ray.h"
 #include "Hitable.h"
-#include "Material.h"
+#include "../materials/Material.h"
 
 class Sphere : public Hitable {
 public:

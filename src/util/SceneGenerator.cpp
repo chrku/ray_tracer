@@ -4,12 +4,12 @@
 
 #include "SceneGenerator.h"
 #include "Texture.h"
-#include "../math/Lambertian.h"
-#include "../math/Sphere.h"
-#include "../math/Metal.h"
-#include "../math/Dielectric.h"
-#include "../math/DiffuseLight.h"
-#include "../math/AARect.h"
+#include "../materials/Lambertian.h"
+#include "../shapes/Sphere.h"
+#include "../materials/Metal.h"
+#include "../materials/Dielectric.h"
+#include "../materials/DiffuseLight.h"
+#include "../shapes/AARect.h"
 
 SceneGenerator::SceneGenerator() : rng_() {
 }

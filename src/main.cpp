@@ -4,17 +4,17 @@
 
 #include "math/Vec3.h"
 #include "util/ColorBuffer.h"
-#include "math/Sphere.h"
+#include "shapes/Sphere.h"
 #include "math/Camera.h"
 #include "SimpleRecursiveRayTracer.h"
-#include "math/HitableCollection.h"
+#include "shapes/HitableCollection.h"
 #include "math/BVH.h"
 #include "util/SceneGenerator.h"
 
 int main() {
     int width = 400;
     int height = 200;
-    float fovy = 20.f;
+    float fovy = 60.f;
     float a = static_cast<float>(width) / height;
 
     ColorBuffer colorBuffer(width, height);
@@ -28,7 +28,7 @@ int main() {
             10.f,
             0.f, 1.f);
 
-    SimpleRecursiveRayTracer ray_tracer(100, camera);
+    SimpleRecursiveRayTracer ray_tracer(200, camera);
     HitableCollection world;
     SceneGenerator generator;
 

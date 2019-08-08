@@ -8,9 +8,9 @@
 #include <iterator>
 #include <memory>
 
-#include "Vec3.h"
-#include "Ray.h"
-#include "AABB.h"
+#include "../math/Vec3.h"
+#include "../math/Ray.h"
+#include "../math/AABB.h"
 
 class Material;
 

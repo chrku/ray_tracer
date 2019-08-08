@@ -8,7 +8,7 @@
 #include <random>
 
 #include "util/ColorBuffer.h"
-#include "math/Hitable.h"
+#include "shapes/Hitable.h"
 #include "math/Camera.h"
 
 class SimpleRecursiveRayTracer {

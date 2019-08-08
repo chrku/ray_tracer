@@ -6,7 +6,7 @@
 #define RAY_TRACER_BVH_H
 
 #include <cstdlib>
-#include "HitableCollection.h"
+#include "../shapes/HitableCollection.h"
 
 namespace BVH {
     class BVHNode : public Hitable {
