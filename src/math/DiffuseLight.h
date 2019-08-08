@@ -16,7 +16,7 @@ public:
     bool scatter(const Ray& ray, const HitRecord& r, Vec3& attenuation, Ray& scattered) const override {
         return false;
     }
-    virtual Vec3 emitted(float u, float v, const Vec3& p) const {
+    Vec3 emitted(float u, float v, const Vec3& p) const override {
         return texture_->value(u, v, p);
     }
 

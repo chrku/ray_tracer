@@ -32,8 +32,9 @@ Vec3 SimpleRecursiveRayTracer::color(const Ray& ray, const Hitable& object, int 
     Ray scattered{};
     // Recursively trace reflection ray
     Vec3 attenuation(0.f, 0.f, 0.f);
+    Vec3 emitted = record.material->emitted(record.u, record.v, record.point);
     if (recursion_count < 50 && record.material->scatter(ray, record, attenuation, scattered)) {
-      return attenuation * color(scattered, object, recursion_count + 1);
+      return emitted + attenuation * color(scattered, object, recursion_count + 1);
     }
     else {
       return {0.f, 0.f, 0.f};
