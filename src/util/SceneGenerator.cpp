@@ -9,6 +9,9 @@
 #include "../math/Metal.h"
 #include "../math/Dielectric.h"
 
+SceneGenerator::SceneGenerator() : rng_() {
+}
+
 void SceneGenerator::twoPerlinSpheres(HitableCollection &h) {
     std::shared_ptr<PerlinNoiseGenerator> generator = std::make_shared<PerlinNoiseGenerator>();
     std::shared_ptr<Texture> constant_1 = std::make_shared<ConstantTexture>(Vec3(0.9, 0.4, 0.3));
@@ -19,6 +22,11 @@ void SceneGenerator::twoPerlinSpheres(HitableCollection &h) {
     h.addHitable(Sphere(Vec3(4, 1, 0), 1.f, Metal(Vec3(0.7, 0.6, 0.5), 0.f)));
     h.addHitable(Sphere(Vec3(0, 1, 0), 1.f, Dielectric(1.5)));
     h.addHitable(Sphere(Vec3(-4, 1, 0), 1.f, Lambertian(checker)));
+}
+
+void SceneGenerator::earthScene(HitableCollection &h) {
+    std::shared_ptr<Texture> earth_texture = std::make_shared<ImageTexture>("../res/earth.jpg");
+    h.addHitable(Sphere(Vec3(0,0,0), 5, Lambertian(earth_texture)));
 }
 
 float SceneGenerator::getRandom() {

@@ -13,6 +13,7 @@ public:
     SceneGenerator();
     void twoSpheres(HitableCollection& h);
     void twoPerlinSpheres(HitableCollection& h);
+    void earthScene(HitableCollection& h);
     void randomScene(HitableCollection& h);
 private:
     float getRandom();

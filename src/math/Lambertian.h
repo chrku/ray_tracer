@@ -22,7 +22,7 @@ public:
     Ray& ray_out) const override {
     Vec3 target = record.point + record.normal + generate_random_point_in_unit_sphere(dist_, prng_);
     ray_out = Ray(record.point, target - record.point, ray_in.time());
-    attenuation = texture_->value(0, 0, record.point);
+    attenuation = texture_->value(record.u, record.v, record.point);
     return true;
   }
 private:

@@ -9,6 +9,7 @@
 
 #include "../math/Vec3.h"
 #include "../math/PerlinNoiseGenerator.h"
+#include "ColorBuffer.h"
 
 class Texture {
 public:
@@ -49,11 +50,16 @@ private:
 
 class ImageTexture : public Texture {
 public:
-    ImageTexture();
-    ImageTexture(std::string image_path, int A, int B);
+    explicit ImageTexture(std::string image_path);
     Vec3 value(float u, float v, const Vec3& point) const override ;
     ~ImageTexture() override;
+
+    bool valid() { return imageData_ == nullptr; }
 private:
+    std::uint8_t* imageData_;
+    std::int32_t width_;
+    std::int32_t height_;
+    std::int32_t stride_;
 };
 
 #endif //RAY_TRACER_TEXTURE_H

@@ -31,6 +31,7 @@ public:
         record.t = solution_1;
         record.point = r.pointAtValue(record.t);
         record.normal = (record.point - center_) / radius_;
+        getSphereUV((record.point - center_) / radius_, record.u, record.v);
         record.material = material_;
         return true;
       }
@@ -40,6 +41,7 @@ public:
         record.t = solution_2;
         record.point = r.pointAtValue(record.t);
         record.normal = (record.point - center_) / radius_;
+        getSphereUV((record.point - center_) / radius_, record.u, record.v);
         record.material = material_;
         return true;
       }

@@ -19,6 +19,8 @@ struct HitRecord {
   Vec3 point;
   Vec3 normal;
   std::shared_ptr<Material> material;
+  float u;
+  float v;
 };
 
 class Hitable {

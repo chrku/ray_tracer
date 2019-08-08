@@ -5,20 +5,16 @@
 #include "math/Vec3.h"
 #include "util/ColorBuffer.h"
 #include "math/Sphere.h"
-#include "math/MovingSphere.h"
 #include "math/Camera.h"
-#include "math/Lambertian.h"
-#include "math/Metal.h"
 #include "SimpleRecursiveRayTracer.h"
 #include "math/HitableCollection.h"
-#include "math/Dielectric.h"
 #include "math/BVH.h"
 #include "util/SceneGenerator.h"
 
 int main() {
     int width = 400;
     int height = 200;
-    float fovy = 20.f;
+    float fovy = 90.f;
     float a = static_cast<float>(width) / height;
 
     ColorBuffer colorBuffer(width, height);
@@ -36,7 +32,7 @@ int main() {
     HitableCollection world;
     SceneGenerator generator;
 
-    generator.twoPerlinSpheres(world);
+    generator.earthScene(world);
 
     BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 
