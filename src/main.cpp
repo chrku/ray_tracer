@@ -13,19 +13,7 @@
 #include "math/HitableCollection.h"
 #include "math/Dielectric.h"
 #include "math/BVH.h"
-
-void generateRandomScene(HitableCollection &world) {
-    std::shared_ptr<PerlinNoiseGenerator> generator = std::make_shared<PerlinNoiseGenerator>();
-    std::shared_ptr<Texture> constant_1 = std::make_shared<ConstantTexture>(Vec3(0.9, 0.4, 0.3));
-    std::shared_ptr<Texture> constant_2 = std::make_shared<ConstantTexture>(Vec3(0.3, 0.2, 0.3));
-    std::shared_ptr<Texture> checker = std::make_shared<CheckerTexture>(constant_1, constant_2);
-    std::shared_ptr<Texture> perlin = std::make_shared<PerlinNoiseTexture>(generator, 5.f);
-    world.addHitable(Sphere(Vec3(0, -1000, 0), 1000, Lambertian(perlin)));
-    world.addHitable(Sphere(Vec3(4, 1, 0), 1.f, Metal(Vec3(0.7, 0.6, 0.5), 0.f)));
-    world.addHitable(Sphere(Vec3(0, 1, 0), 1.f, Dielectric(1.5)));
-    world.addHitable(Sphere(Vec3(-4, 1, 0), 1.f, Lambertian(checker)));
-
-}
+#include "util/SceneGenerator.h"
 
 int main() {
     int width = 400;
@@ -46,8 +34,10 @@ int main() {
 
     SimpleRecursiveRayTracer ray_tracer(100, camera);
     HitableCollection world;
+    SceneGenerator generator;
 
-    generateRandomScene(world);
+    generator.twoPerlinSpheres(world);
+
     BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 
     ray_tracer.render(node, colorBuffer);
