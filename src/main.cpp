@@ -14,7 +14,7 @@
 int main() {
     int width = 400;
     int height = 200;
-    float fovy = 90.f;
+    float fovy = 20.f;
     float a = static_cast<float>(width) / height;
 
     ColorBuffer colorBuffer(width, height);
@@ -32,7 +32,7 @@ int main() {
     HitableCollection world;
     SceneGenerator generator;
 
-    generator.earthScene(world);
+    generator.simpleLight(world);
 
     BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 

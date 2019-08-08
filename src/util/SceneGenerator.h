@@ -11,10 +11,9 @@
 class SceneGenerator {
 public:
     SceneGenerator();
-    void twoSpheres(HitableCollection& h);
     void twoPerlinSpheres(HitableCollection& h);
     void earthScene(HitableCollection& h);
-    void randomScene(HitableCollection& h);
+    void simpleLight(HitableCollection& h);
 private:
     float getRandom();
     std::mt19937 rng_;

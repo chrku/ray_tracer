@@ -8,6 +8,8 @@
 #include "../math/Sphere.h"
 #include "../math/Metal.h"
 #include "../math/Dielectric.h"
+#include "../math/DiffuseLight.h"
+#include "../math/AARect.h"
 
 SceneGenerator::SceneGenerator() : rng_() {
 }
@@ -32,4 +34,14 @@ void SceneGenerator::earthScene(HitableCollection &h) {
 float SceneGenerator::getRandom() {
     std::uniform_real_distribution<float> dist(-1, 1);
     return dist(rng_);
+}
+
+void SceneGenerator::simpleLight(HitableCollection &h) {
+    std::shared_ptr<PerlinNoiseGenerator> generator = std::make_shared<PerlinNoiseGenerator>();
+    std::shared_ptr<Texture> perlin = std::make_shared<PerlinNoiseTexture>(generator, 5.f);
+    std::shared_ptr<Texture> light = std::make_shared<ConstantTexture>(Vec3(4.f, 4.f, 4.f));
+    h.addHitable(Sphere(Vec3(0, -1000, 0), 1000, Lambertian(perlin)));
+    h.addHitable(Sphere(Vec3(0, 2, 0), 2, Lambertian(perlin)));
+    h.addHitable(Sphere(Vec3(0, 7, 0), 2, DiffuseLight(light)));
+    h.addHitable(AARect(3, 5, 1, 3, -2, DiffuseLight(light)));
 }
