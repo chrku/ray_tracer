@@ -14,13 +14,13 @@
 int main() {
     int width = 400;
     int height = 200;
-    float fovy = 60.f;
+    float fovy = 40.f;
     float a = static_cast<float>(width) / height;
 
     ColorBuffer colorBuffer(width, height);
     Camera camera(
-            Vec3(13, 2, 3),
-            Vec3(0, 0, 0),
+            Vec3(278, 278, -800),
+            Vec3(278, 278, 0),
             Vec3(0, 1, 0),
             fovy * M_PI / 180,
             a,
@@ -28,7 +28,7 @@ int main() {
             10.f,
             0.f, 1.f);
 
-    SimpleRecursiveRayTracer ray_tracer(200, camera);
+    SimpleRecursiveRayTracer ray_tracer(300, camera);
     HitableCollection world;
     SceneGenerator generator;
 
