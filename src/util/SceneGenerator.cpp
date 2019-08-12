@@ -11,6 +11,7 @@
 #include "../materials/DiffuseLight.h"
 #include "../shapes/AARect.h"
 #include "../shapes/transformations/FlipNormals.h"
+#include "../shapes/Box.h"
 
 SceneGenerator::SceneGenerator() : rng_() {
 }
@@ -59,4 +60,20 @@ void SceneGenerator::cornellBox(HitableCollection &h) {
     h.addHitable(FlipNormals(XZRect(0, 555, 0, 555, 555, Lambertian(white))));
     h.addHitable(XZRect(0, 555, 0, 555, 0, Lambertian(white)));
     h.addHitable(FlipNormals(XYRect(0, 555, 0, 555, 555, Lambertian(white))));
+}
+
+void SceneGenerator::cornellBoxFull(HitableCollection &h) {
+    std::shared_ptr<Texture> red = std::make_shared<ConstantTexture>(Vec3(0.65, 0.05, 0.05));
+    std::shared_ptr<Texture> blue = std::make_shared<ConstantTexture>(Vec3(0.73, 0.73, 0.73));
+    std::shared_ptr<Texture> green = std::make_shared<ConstantTexture>(Vec3(0.12, 0.45, 0.15));
+    std::shared_ptr<Texture> white = std::make_shared<ConstantTexture>(Vec3(0.73f, 0.73f, 0.73f));
+    std::shared_ptr<Texture> light = std::make_shared<ConstantTexture>(Vec3(15.f, 15.f, 15.f));
+    h.addHitable(FlipNormals(YZRect(0, 555, 0, 555, 555, Lambertian(green))));
+    h.addHitable(YZRect(0, 555, 0, 555, 0, Lambertian(red)));
+    h.addHitable(XZRect(213, 343, 227, 332, 554, DiffuseLight(light)));
+    h.addHitable(FlipNormals(XZRect(0, 555, 0, 555, 555, Lambertian(white))));
+    h.addHitable(XZRect(0, 555, 0, 555, 0, Lambertian(white)));
+    h.addHitable(FlipNormals(XYRect(0, 555, 0, 555, 555, Lambertian(white))));
+    h.addHitable(Box(Vec3(130, 0, 65), Vec3(295, 165, 230), Lambertian(white)));
+    h.addHitable(Box(Vec3(265, 0, 295), Vec3(430, 330, 460), Lambertian(white)));
 }

@@ -13,8 +13,8 @@
 
 int main() {
     int width = 400;
-    int height = 200;
-    float fovy = 40.f;
+    int height = 500;
+    float fovy = 50.f;
     float a = static_cast<float>(width) / height;
 
     ColorBuffer colorBuffer(width, height);
@@ -32,7 +32,7 @@ int main() {
     HitableCollection world;
     SceneGenerator generator;
 
-    generator.cornellBox(world);
+    generator.cornellBoxFull(world);
 
     BVH::BVHNode node(world, 0, world.length(), 0.f, 1.f);
 

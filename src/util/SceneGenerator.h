@@ -16,6 +16,8 @@ public:
     void simpleLight(HitableCollection& h);
 
     void cornellBox(HitableCollection &h);
+
+    void cornellBoxFull(HitableCollection &h);
 private:
     float getRandom();
     std::mt19937 rng_;

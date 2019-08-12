@@ -6,6 +6,8 @@
 #define RAY_TRACER_AARECT_H
 
 
+#include <utility>
+
 #include "Hitable.h"
 
 class XYRect : public Hitable {
@@ -14,6 +16,9 @@ public:
     XYRect(float x0, float x1, float y0, float y1, float z, MATERIAL_IMPL &&material)
         : x0_(x0), x1_(x1), y0_(y0), y1_(y1), z_(z), material_(std::make_shared<MATERIAL_IMPL>(material))
     {}
+
+    XYRect(float x0, float x1, float y0, float y1, float z, std::shared_ptr<Material> material)
+            : x0_(x0), x1_(x1), y0_(y0), y1_(y1), z_(z), material_(std::move(material)) {}
 
     bool hit(const Ray& r, float t0, float t1, HitRecord& record) const override {
         float t = (z_ - r.origin().z()) / r.direction().z();
@@ -50,6 +55,9 @@ public:
     template<typename MATERIAL_IMPL>
     YZRect(float y0, float y1, float z0, float z1, float x, MATERIAL_IMPL &&material)
             : y0_(y0), y1_(y1), z0_(z0), z1_(z1), x_(x), material_(std::make_shared<MATERIAL_IMPL>(material)) {}
+
+    YZRect(float y0, float y1, float z0, float z1, float x, std::shared_ptr<Material> material)
+            : y0_(y0), y1_(y1), z0_(z0), z1_(z1), x_(x), material_(std::move(material)) {}
 
     bool hit(const Ray &r, float t0, float t1, HitRecord &record) const override {
         float t = (x_ - r.origin().x()) / r.direction().x();
@@ -88,6 +96,9 @@ public:
     template<typename MATERIAL_IMPL>
     XZRect(float x0, float x1, float z0, float z1, float y, MATERIAL_IMPL &&material)
             : x0_(x0), x1_(x1), z0_(z0), z1_(z1), y_(y), material_(std::make_shared<MATERIAL_IMPL>(material)) {}
+
+    XZRect(float x0, float x1, float z0, float z1, float y, std::shared_ptr<Material> material)
+            : x0_(x0), x1_(x1), z0_(z0), z1_(z1), y_(y), material_(std::move(material)) {}
 
     bool hit(const Ray &r, float t0, float t1, HitRecord &record) const override {
         float t = (y_ - r.origin().y()) / r.direction().y();
